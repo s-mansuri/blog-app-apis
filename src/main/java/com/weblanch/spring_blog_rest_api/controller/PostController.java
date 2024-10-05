@@ -5,6 +5,7 @@ import com.weblanch.spring_blog_rest_api.payload.PostDto;
 import com.weblanch.spring_blog_rest_api.payload.PostResponse;
 import com.weblanch.spring_blog_rest_api.service.PostService;
 import com.weblanch.spring_blog_rest_api.utils.AppConstants;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -21,7 +22,7 @@ public class PostController {
     }
 
     @PostMapping
-    public ResponseEntity<PostDto> createPost(@RequestBody PostDto postDto){
+    public ResponseEntity<PostDto> createPost(@Valid @RequestBody PostDto postDto){
         return new ResponseEntity<PostDto>(postService.createPost(postDto),
                 HttpStatus.CREATED);
     }
@@ -40,7 +41,7 @@ public class PostController {
     }
 
     @PutMapping("/{postId}")
-    public ResponseEntity<PostDto> updatePostById(@PathVariable(name = "postId") long postId, @RequestBody PostDto postDto){
+    public ResponseEntity<PostDto> updatePostById(@Valid @PathVariable(name = "postId") long postId, @RequestBody PostDto postDto){
         return ResponseEntity.ok(postService.updatePostById(postDto, postId));
     }
 
