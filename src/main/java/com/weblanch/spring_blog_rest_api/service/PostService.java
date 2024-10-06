@@ -1,5 +1,6 @@
 package com.weblanch.spring_blog_rest_api.service;
 
+import com.weblanch.spring_blog_rest_api.entity.Post;
 import com.weblanch.spring_blog_rest_api.payload.PostDto;
 import com.weblanch.spring_blog_rest_api.payload.PostResponse;
 
@@ -11,4 +12,5 @@ public interface PostService {
     PostDto getPostById(long postId);
     PostDto updatePostById(PostDto postDto, long postId);
     String deletePostById(long postId);
+    List<PostDto> getPostsByCategory(Long categoryId);
 }

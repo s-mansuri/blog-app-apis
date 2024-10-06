@@ -50,7 +50,9 @@ public class SecurityConfig {
     SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.csrf(csrf -> csrf.disable()).authorizeHttpRequests(authorize ->
                 // authorize.anyRequest().authenticated()
-                authorize.requestMatchers(HttpMethod.GET, "/api/**").permitAll()
+                authorize
+                        .requestMatchers(HttpMethod.GET, "/api/**").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/api/categories/**").permitAll()
                         .requestMatchers(("/api/auth/**")).permitAll()
                         .anyRequest().authenticated())
                 .exceptionHandling(exception -> exception

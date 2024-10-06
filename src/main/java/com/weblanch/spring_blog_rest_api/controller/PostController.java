@@ -1,5 +1,6 @@
 package com.weblanch.spring_blog_rest_api.controller;
 
+import com.weblanch.spring_blog_rest_api.entity.Post;
 import com.weblanch.spring_blog_rest_api.payload.PostDto;
 import com.weblanch.spring_blog_rest_api.payload.PostResponse;
 import com.weblanch.spring_blog_rest_api.service.PostService;
@@ -9,6 +10,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/posts")
@@ -50,5 +53,11 @@ public class PostController {
     public ResponseEntity<String> deletePostById(@PathVariable(name = "postId") long postId){
         postService.deletePostById(postId);
         return new ResponseEntity<>("Post with id: " + postId + " deleted successfully!", HttpStatus.OK);
+    }
+
+    @GetMapping("categories/{categoryId}")
+    public ResponseEntity<List<PostDto>> getPostsByCategory(@PathVariable(name = "categoryId") Long categoryId){
+        List<PostDto> postDtos = postService.getPostsByCategory(categoryId);
+        return ResponseEntity.ok(postDtos);
     }
 }
