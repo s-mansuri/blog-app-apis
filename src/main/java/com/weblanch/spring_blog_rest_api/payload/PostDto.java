@@ -1,5 +1,6 @@
 package com.weblanch.spring_blog_rest_api.payload;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
@@ -9,9 +10,11 @@ import lombok.Data;
 import java.util.Set;
 
 @Data
+@Schema(description = "PostDto Model Information")
 public class PostDto {
     private long postId;
 
+    @Schema(description = "Blog post title")
     // title should not be null or empty and min length is 2
     @NotEmpty
     @NotNull
