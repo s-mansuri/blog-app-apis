@@ -1,5 +1,6 @@
 package com.weblanch.spring_blog_rest_api.controller;
 
+import com.weblanch.spring_blog_rest_api.payload.JwtAuthResponse;
 import com.weblanch.spring_blog_rest_api.payload.LoginDto;
 import com.weblanch.spring_blog_rest_api.payload.RegisterDto;
 import com.weblanch.spring_blog_rest_api.service.AuthService;
@@ -19,9 +20,11 @@ public class AuthController {
     }
 
     @PostMapping(value = {"/signin", "/login"})
-    public ResponseEntity<String> login(@RequestBody LoginDto loginDto){
-        String response = authService.login(loginDto);
-        return ResponseEntity.ok(response);
+    public ResponseEntity<JwtAuthResponse> login(@RequestBody LoginDto loginDto){
+        String token = authService.login(loginDto);
+        JwtAuthResponse jwtAuthResponse = new JwtAuthResponse();
+        jwtAuthResponse.setAccessToken(token);
+        return ResponseEntity.ok(jwtAuthResponse);
     }
 
     @PostMapping(value = {"/register", "/signup"})
